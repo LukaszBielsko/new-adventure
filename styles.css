@@ -14,6 +14,7 @@
   box-sizing: border-box;
 }
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 body {
@@ -279,6 +280,11 @@ h1 em {
   display: grid;
   grid-template-columns: minmax(10rem, 0.7fr) 2.2fr;
   gap: 2rem 5rem;
+}
+.intro-grid > *,
+.process-grid > *,
+.contact-grid > * {
+  min-width: 0;
 }
 h2 {
   margin-bottom: 1.35rem;
@@ -547,7 +553,9 @@ figcaption {
   margin-top: 2rem;
 }
 .direct-contact a {
-  width: max-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  width: 100%;
   font-weight: 800;
 }
 .direct-contact a:hover {
@@ -689,11 +697,17 @@ textarea:focus {
     gap: 1.6rem;
     background: var(--ink-deep);
     font-size: 1rem;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+    visibility: hidden;
   }
   .main-nav.is-open {
-    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
   }
   .main-nav .nav-cta {
     margin-top: 0.5rem;
